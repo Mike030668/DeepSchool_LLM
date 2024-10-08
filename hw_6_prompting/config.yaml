@@ -1,0 +1,42 @@
+server:
+  host: 127.0.0.1
+  port: 3400
+client:
+    base_url: "https://api.together.xyz/v1"
+    call_params:
+      model: "mistralai/Mixtral-8x7B-Instruct-v0.1"
+      # model: "meta-llama/Llama-2-70b-hf"
+      # model: "openchat/openchat-3.5-1210"
+      temperature: 0
+      max_tokens: 128
+free_text_client:
+    base_url: "https://api.together.xyz/v1"
+    call_params:
+      model: "meta-llama/Llama-3-8b-chat-hf"
+      # model: "meta-llama/Llama-2-70b-hf"
+      # model: "openchat/openchat-3.5-1210"
+      temperature: 0
+      max_tokens: 1024
+      # free_text: true
+embeddings:
+  model:
+    name: TensorflowHubEmbeddings
+    params:
+      # model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+      model_url: "https://www.kaggle.com/models/google/universal-sentence-encoder/frameworks/TensorFlow2/variations/multilingual/versions/2"
+
+vectorstore:
+  create: true
+  directory: "catalog.db"
+  description_column: "description"
+  search_kwargs:
+    score_threshold: 0.001
+    k: 100
+
+catalog:
+  description_column: "description"
+  file: "catalog.csv"
+parse-item:
+  top_k: 1
+  relevant_k: 1000
+  score_threshold: 0.1
